@@ -2,10 +2,9 @@ defmodule Server.Supervisor do
   alias Server.HttpServer
 
   def start(port) when is_integer(port) and port > 1023 do
-    server = spawn(fn -> HttpServer.start(port) end)
+    spawn(fn -> HttpServer.start(port) end)
     |> IO.inspect()
     |> life_checker(port)
-
   end
 
   def life_checker(pid, port) do
@@ -16,6 +15,5 @@ defmodule Server.Supervisor do
 
   def resurrect(true, pid, port), do: life_checker(pid, port)
   def resurrect(false, _pid, port), do: spawn(fn -> start(port) end)
-
 
 end
