@@ -1,7 +1,6 @@
 defmodule Server.Controller do
   alias Server.Router
   alias Server.Parser
-  alias Server.Conv
   alias Server.Formatter
 
   def handle_request(request) do
